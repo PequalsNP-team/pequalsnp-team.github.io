@@ -25,7 +25,7 @@ At the end we read again the challenge description: we forgot that John...
 
     thanks to his new smartphone he looks the city of his choice up while rushing to the airport
   
-was on his smartphone! That's the reason behind this 'px' currency. So we opened up the developer tool, emulated the viewport of a Nexus 6 and tried the width sizes in px. Than, a QR code with our flag popped out!
+was on his smartphone! That's the reason behind this 'px' currency. So we opened up the developer tool, emulated the viewport of a Nexus 5 and tried the width sizes in px. Than, a QR code with our flag popped out!
 
 ![Our QR code]({{ site.url }}/assets/johnthetraveller-QR.jpg){: .center-image }
 
