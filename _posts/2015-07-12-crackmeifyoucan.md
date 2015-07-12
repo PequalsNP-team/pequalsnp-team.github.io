@@ -1,9 +1,9 @@
 ---
 layout: post
 title: "PoliCTF 2015 - Crack Me If You Can"
-categories: writeups polictf-2015
+category: writeups
 author: thezero
-tags: reversing
+tags: reversing polictf-2015
 ---
 
 ## Crack Me If You Can
