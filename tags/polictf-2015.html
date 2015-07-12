@@ -15,26 +15,11 @@ Final score: 450 points, Final Rank: 152/328.
 <h2>Writeups</h2>
 <br/>
 <ul class="posts">
-  {% for post in site.tags[page.cat].sticky %}
-    <li>
-      <span class="post-date">{{ post.date | date: "%b %-d, %Y" }} - Sticky</span>
-      <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-      {{ post.excerpt }}
-    </li>
-  {% endfor %}
   {% for post in site.tags[page.cat] %}
-    {% assign sticky = false %}
-    {% for cat in post.categories %}
-      {% if cat == 'sticky' %}
-        {% assign sticky = true %}
-      {% endif %}
-    {% endfor %}
-    {% unless sticky %}
     <li>
       <span class="post-date">{{ post.date | date: "%b %-d, %Y" }}</span>
       <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
       {{ post.excerpt }}
     </li>
-    {% endunless %}
   {% endfor %}
 </ul>
