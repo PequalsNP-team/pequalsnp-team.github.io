@@ -3,7 +3,8 @@ layout: default
 ---
 
 <div class="home">
-
+  <img class="home-logo" src="/imgs/logo_inverted.png" alt="logo"/><br/><br/>
+  <h1 class="nomargin">Posts</h1>
   <ul class="posts">
     {% for post in site.categories.sticky %}
       <li>
@@ -28,7 +29,5 @@ layout: default
      {% endunless %}
     {% endfor %}
   </ul>
-
-  <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
 
 </div>

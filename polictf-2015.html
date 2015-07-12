@@ -1,0 +1,40 @@
+---
+layout: default
+title: "PoliCTF 2015 WriteUp"
+permalink: /polictf-2015/
+cat: polictf-2015
+---
+
+<h1 class="category">{{ page.title }}</h1>
+<p>
+This was our first CTF ever.<br/>
+Team of 2 members (thezero and phosphore), duration of 2 days (24 hour), we have solved 5/26 challenges<br/>
+and almost solved a few challenges.<br/>
+Final score: 450 points, Final Rank: 152/328.
+</p><br/>
+<h2>Writeups</h2>
+<br/>
+<ul class="posts">
+  {% for post in site.tags[page.cat].sticky %}
+    <li>
+      <span class="post-date">{{ post.date | date: "%b %-d, %Y" }} - Sticky</span>
+      <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+      {{ post.excerpt }}
+    </li>
+  {% endfor %}
+  {% for post in site.tags[page.cat] %}
+    {% assign sticky = false %}
+    {% for cat in post.categories %}
+      {% if cat == 'sticky' %}
+        {% assign sticky = true %}
+      {% endif %}
+    {% endfor %}
+    {% unless sticky %}
+    <li>
+      <span class="post-date">{{ post.date | date: "%b %-d, %Y" }}</span>
+      <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+      {{ post.excerpt }}
+    </li>
+    {% endunless %}
+  {% endfor %}
+</ul>
