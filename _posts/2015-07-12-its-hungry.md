@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "PoliCTF 2015 - Hanoi as a Service"
+title: "PoliCTF 2015 - It's Hungry"
 categories: writeups polictf-2015
 author: phospore
 tags: forensics
