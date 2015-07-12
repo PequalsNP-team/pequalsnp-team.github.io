@@ -14,7 +14,11 @@ Old McDonald had a farm. Old McDonald liked chiptune. He also needed to remind i
 Hidden/Special Challenge!
 
 ### Writeup
-This one was a hidden challenge available clicking on the timestamp of the chiptune player. We started by inspecting the sources of the player but we found nothing. So we focused on the audio file "oldmcdonald.flac".<br/>
+This one was a hidden challenge available clicking on the timestamp of the chiptune player.
+
+     `phosphore:~$ wget http://polictf.it/tunes/oldmcdonald.flac`
+
+We started by inspecting the sources of the player but we found nothing. So we focused on the audio file "oldmcdonald.flac".<br/>
 Again, using metaflac, a command-line FLAC metadata editor: no results. <br/>
 Being aware of several ways to hide messages in audio files we tried to extract text by LSB-based audio steganography. Failing.  <br/>
 That's when we opened up the spectogram of the song with sonic-visualizer...  
