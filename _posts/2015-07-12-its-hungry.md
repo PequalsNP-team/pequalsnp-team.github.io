@@ -31,7 +31,7 @@ then, around 1:08 at ≃ 18'600Hz, we run into this:
 
 ![The morse code]({{ site.url }}/assets/mcdonald-spectrum2.jpg){: .center-image }
 
-Cleary morse! After a few tries this happened.
+Clearly morse! After a few tries this happened.
 
 ![The morse message]({{ site.url }}/assets/mcdonald-morse.jpg){: .center-image }
 
