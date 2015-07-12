@@ -37,7 +37,7 @@ Clearly morse! After a few tries this happened.
 
 ![The trollface]({{ site.url }}/assets/mcdonald-trollface.jpg){: .center-image }
 
-Yes, we were frustrated, so we vented on ocean :(
+Yes, we were frustrated, so we vented against ocean, a #polictf op :(
 
 ![The trollface]({{ site.url }}/assets/mcdonald-irc.jpg){: .center-image }
 
