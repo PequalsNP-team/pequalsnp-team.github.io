@@ -2,7 +2,7 @@
 layout: post
 title: "PoliCTF 2015 - It's Hungry"
 categories: writeups polictf-2015
-author: phospore
+author: phosphore
 tags: forensics
 ---
 
