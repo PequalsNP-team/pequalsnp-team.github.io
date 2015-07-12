@@ -18,7 +18,9 @@ This one was a hidden challenge available clicking on the timestamp of the chipt
 
      phosphore:~$ wget http://polictf.it/tunes/oldmcdonald.flac
 
-We started by inspecting the sources of the player but we found nothing. So we focused on the audio file `oldmcdonald.flac`.<br/>
+We started by inspecting the sources of the player but we found nothing. So we focused on the audio file `oldmcdonald.flac`.  
+
+<br/>
 Again, using [metaflac](http://linux.die.net/man/1/metaflac), a command-line FLAC metadata editor: no results. <br/>
 Being aware of several ways to hide messages in audio files we tried to extract text by LSB-based audio steganography. Failing.  <br/>
 That's when we opened up the spectogram of the song with [sonic-visualizer](www.sonicvisualiser.org)...  
