@@ -1,9 +1,9 @@
 ---
 layout: post
 title: "PoliCTF 2015 - John the Referee"
-categories: writeups polictf-2015
+category: writeups
 author: thezero
-tags: web
+tags: web polictf-2015
 ---
 
 ## John The Referee
