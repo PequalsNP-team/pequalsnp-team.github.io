@@ -1,0 +1,12 @@
+---
+layout: default
+title: Tags Archive
+permalink: /tags/
+---
+
+<h1 class="category">{{ page.title }}</h1>
+<ul class="tags">
+  {% for tag in site.tags | sort %}
+    <li>{% if tag[0] %}<a class="post-link" href="/tags/{{ tag[0] }}">{{ tag[0] }}</a>{% endif %}<span class="counter counter-blue">{{ tag[1].size }}</span></li>
+  {% endfor %}
+</ul>

@@ -428,17 +428,30 @@ blockquote {
     font-size: 14px;
     font-weight: bold;
     line-height: 1;
-    color: #EEE !important;
-    background-color: #093;
-    border-radius: 10px;
+    color: #FFF !important;
+    border-radius: 0.25em;
+    margin-left:5px;
+    margin-right:5px;
 }
+.counter:hover {text-decoration: none;}
 
-.counter:hover {
-    text-decoration: none;
-    background-color: #073;
+.counter-green {background-color: #093;}
+.counter-green:hover {background-color: #073;}
+.counter-red {background-color: #D9534F;}
+.counter-red:hover {background-color: #99433F;}
+.counter-blue {background-color: #337AB7;}
+.counter-blue:hover {background-color: #335A87;}
+
+.posts li a.counter {
+  float: left;
+  margin-right: 10px;
 }
 
 .home-logo {
   width: 120px;
   border-radius: 10px;
+}
+
+.tags {
+  list-style-type: none;
 }
