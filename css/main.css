@@ -461,3 +461,7 @@ img {
 	max-width:100%;
 	height:auto
 }
+
+strong {
+  font-weight: bold !important;
+}
