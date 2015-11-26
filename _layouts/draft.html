@@ -1,0 +1,20 @@
+---
+layout: default
+---
+<div class="post">
+
+  <header class="post-header">
+    <h1>{{ page.title }}</h1>
+    <p class="meta">{{ page.date | date: "%b %-d, %Y" }}{% if page.author %} • By {% if site.authors[page.author] %}<a href="{{ site.authors[page.author].url }}">{{ page.author }}</a>{% else %}{{ page.author }}{% endif %}{% endif %}{% if page.meta %} • {{ page.meta }}{% endif %}</p>
+    Category: <a class="counter counter-red" href="/{{ page.category }}">{{ page.category }}</a>
+    <br/>
+    Tags: {% for tag in page.tags %}
+      <a class="counter counter-green" href="/tags/{{ tag }}">{{ tag }}</a>
+    {% endfor %}
+  </header>
+
+  <article class="post-content">
+  <h3><a class="counter counter-red" style="font-size: 26px;">draft</a> Work in progress...</h3>
+  </article>
+
+</div>

@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: draft
 title: "PoliCTF 2015 - John the Referee"
 category: writeups
 author: thezero
