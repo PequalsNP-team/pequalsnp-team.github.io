@@ -3,7 +3,7 @@ layout: post
 title: "InsomniHack Teaser CTF 2016 - Bring The Noise"
 category: writeups
 author: thezero
-tags: crypto insomnihack-teaser-2015
+tags: crypto insomnihack-teaser-2016
 ---
 
 ## Bring The Noise
