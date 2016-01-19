@@ -27,14 +27,15 @@ We solved the 2 problems separately.
 ----------
 
 Connecting on the server return the PoW challenge:
-```sh
-> nc bringthenoise.insomnihack.ch 1111
-# Challenge = 8268c
-```
+
+{% highlight console %}
+ nc bringthenoise.insomnihack.ch 1111
+ Challenge = 8268c
+{% endhighlight %}
 
 We write a simple script based on [TheZ3ro/combinator](https://github.com/TheZ3ro/combinator)
 
-```js
+{% highlight javascript %}
 var crypto = require('crypto');
 var bruteForce = require("jscombinator").comb;
 var dict = require("jscombinator").dict;
@@ -51,7 +52,7 @@ bruteForce(dict.lower_alpha_numeric, Array.range(1,8), function(value){
   }
   return false;
 });
-```
+{% endhighlight %}
 
 ![Combinator]({{ site.url }}/assets/combinator.png){: .center-image }
 
