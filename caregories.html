@@ -1,0 +1,12 @@
+---
+layout: default
+title: Categories Archive
+permalink: /categories/
+---
+
+<h1 class="category">{{ page.title }}</h1>
+<ul class="tags">
+  {% for cat in site.categories | sort %}
+    <li>{% if cat[0] %}<a class="post-link" href="/{{ cat[0] }}">{{ cat[0] }}</a>{% endif %}<span class="counter counter-blue">{{ cat | last | size }}</span></li>
+  {% endfor %}
+</ul>
