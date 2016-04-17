@@ -55,5 +55,5 @@ After a lot of time and Distributed Computing, we came up with the following sum
 
 `140.13`
 
-This is the file with line number and moves number if you want to check:
+This is the file with line numbers and moves numbers if you want to check:
 [perm.txt]({{ site.url }}/assets/perm.txt)
