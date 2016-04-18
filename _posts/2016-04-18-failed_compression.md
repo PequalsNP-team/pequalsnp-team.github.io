@@ -11,7 +11,7 @@ Forensics - 80 Points
 
 I was trying to compress some files, but I think I messed it up?
 
- [compressed.zip]({{ site.url }}/assets/compressed.zip)
+file: [compressed.zip] _(not available)_
 
 ### Writeup
 When you try to open the ZIP file, every ZIP programs tells you that it's not a valid archive file.
