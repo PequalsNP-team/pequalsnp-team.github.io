@@ -24,6 +24,7 @@ First things first, always use [binwalk](https://github.com/devttys0/binwalk) or
 And of course use `strings` (ASCII, UTF8, UTF16) or `hexdump -C` on the file, before anything advanced.
 
 * Check plaintext sections, comments (`cat`, `strings`)
+* Hex Editors are your best friend now. We suggest [hexedit](http://rigaux.org/hexedit.html) for the console or [Bless Hex Editor](http://home.gna.org/bless/) if you like it with a GUI. Check for suspicious magic bytes, correct file length, and use `dd if=inputfile.png of=anothefile.zip bs=1 skip=12345 count=6789` to extract concatenated files ("skip" will be the starting position, "count" the number of bytes from the "skip" position to extract)
 * Use [exiftool](http://www.sno.phy.queensu.ca/~phil/exiftool/) for [EXIF](https://it.wikipedia.org/wiki/Exchangeable_image_file_format) data
 * Use [TinEye](http://www.tineye.com/) to upload and search for the image. Select “best match” and hopefully you get the original image. [XORing](https://github.com/hellman/xortool) should do the rest of the job. Also use `compare a.png b.png result.png` from the ImageMagick suite, plenty of params available here.
 * Use [pngcheck](http://www.libpng.org/pub/png/apps/pngcheck.html) for PNGs to check for any corruption or anomalous sections `pngcheck -v`  PNGs can contain a variety of data 'chunks' that are optional (non-critical) as far as rendering is concerned.
