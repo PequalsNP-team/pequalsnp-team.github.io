@@ -14,20 +14,20 @@ I was trying to compress some files, but I think I messed it up?
 file: [compressed.zip] _(not available)_
 
 ### Writeup
-When you try to open the ZIP file, every ZIP programs tells you that it's not a valid archive file.
-With an HexEditor we can see that it's not a ZIP file because it don't have known [Magic Byte](https://en.wikipedia.org/wiki/Magic_number_%28programming%29)
+When you try to open the ZIP file, every ZIP programs tell you that it's not a valid archive file.
+With an HexEditor we can see that it's not a ZIP file because it doesn't have known [Magic Byte](https://en.wikipedia.org/wiki/Magic_number_%28programming%29)
 
 {% highlight console %}
 $ file compressed.zip
 compressed.zip: data
 {% endhighlight %}
 
-Also I noticed that there were lot of PNG/IHDR signature and JPG/JFIF signature.
+Also I noticed that there were lots of PNG/IHDR signature and JPG/JFIF signature.
 So I excluded the `APNG` option and thought that maybe the archive was a concatenation
 of PNG and JPG files.
 Unfortunately every file's header was changed so we extraced with Binwalk the
 start position and end position of every PNG file (based on IHDRpos -12byte and IENDpos +5byte)
-and JPEG file (based on JFIFpos -6byte and `0xFF 0xD9`)
+and JPEG file (based on JFIFpos -6byte and the JPG EOF `0xFF 0xD9`)
 
 So I wrote a script to extract with `dd` every single image fixing the Magic Byte (loaded from a file).
 
