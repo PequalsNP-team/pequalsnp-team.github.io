@@ -1,5 +1,5 @@
 ---
-layout: draft
+layout: post
 title: "Cheatsheet - Socket Basics for CTFs"
 category: cheatsheet
 author: thezero
@@ -28,7 +28,7 @@ t.interact()
 sock.close()
 {% endhighlight %}
 
-### Python Pwntools
+### Python [Pwntools](http://pwntools.com/)
 {% highlight python %}
 from pwn import *
 
