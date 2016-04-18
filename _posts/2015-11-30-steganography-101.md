@@ -46,6 +46,7 @@ And of course use `strings` (ASCII, UTF8, UTF16) or `hexdump -C` on the file, be
 
 * If the image is relatively small check the palette (use `convert input.png output.xpm`). Be aware that sometimes colors are not preserved. In this case use the extra parameter.
 * If there are large portions of the image that look the same colour check with a Bucket Fill (in gimp also remember to set the threshold to 0 when filling) for anything hidden, or play with the curves. Use [Grain extract](http://www.wikihow.com/Create-Hidden-Watermarks-in-GIMP) to check for watermarks.
+* If you see Adobe Suite/CC metadata with `strings`, be sure to open the image with the corresponding program in order to not lose layers informations. If some layer are overlapped, gimp or other image viewers usually will merge all the visible layers in once.
 * Use the [steganabara](http://www.freewebs.com/quangntenemy/steganabara/) tool and amplify the LSB of the image sequentially to check for anything hidden. Remember to zoom in and also look at the borders of the image. If similar colours get amplified radically different data may be hidden there.
 * [Stegsolve](https://www.wechall.net/forum/show/thread/527/Stegsolve_1.3/page-1) (a simple jar `java -jar stegosolve.jar`) is also pretty useful to extract data (based on bitplanes) and analyze images, allowing you to go through dozens of color filters to try to uncover hidden text.
 
