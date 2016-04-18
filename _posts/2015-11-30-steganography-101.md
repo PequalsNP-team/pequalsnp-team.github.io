@@ -19,6 +19,8 @@ First things first, always use [binwalk](https://github.com/devttys0/binwalk) or
 	-z, --carve                  Carve data from files, but don't execute extraction utilities
 	-r, --rm                     Cleanup extracted / zero-size files after extraction
 	-M, --matryoshka             Recursively scan extracted files
+	-R, --raw="\x00\x01"		 Search for a custom string. The search string can include escaped octal and/or hex values.
+	
 {% endhighlight %}
 
 And of course use `strings` (ASCII, UTF8, UTF16) or `hexdump -C` on the file, before anything advanced.
