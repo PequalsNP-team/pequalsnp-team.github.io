@@ -16,7 +16,7 @@ Each verticode has two parts: the color shift and the code.
 The code takes the inputted character and translates it into an ASCII code, and then into binary, then puts that into an image in which each black pixel represents a `1` and each white pixel represents a `0`.
 
 For example, A is 65 which is `1000001` in binary, B is 66 which is `1000010`, and C is 67 which is `1000011`, so the corresponding verticode would look like this.
-![VertiA]({{ site.url }}/assets/A-code.png){: .center-image }
+![VertiA]({{ site.url }}/assets/A-Code.png){: .center-image }
 
 Except, it isn't that simple.
 
@@ -28,7 +28,7 @@ The table for the color codes is:
 ```
 
 This means that a red color shift for the letter A, which is 65 + 0 = 65, would translate into 1000001 in binary; however, a green color shift for the letter A, which is 65 + 3 = 68, would translate into 1000100 in binary.
-![VertiB]({{ site.url }}/assets/B-code.png){: .center-image }
+![VertiB]({{ site.url }}/assets/B-Code.png){: .center-image }
 
 [Given this verticode]({{ site.url }}/assets/code1.png), read the verticode into text and find the flag.
 
