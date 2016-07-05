@@ -23,7 +23,7 @@ It replaces space character (' ') with a pound character ('#') followed by a ran
 Bingo!
 
 
-![Our injection]({{ site.url }}/assets/president-inj.jpg){: .center-image }
+![Our injection]({{ site.url }}/assets/president_inj.png){: .center-image }
 
 
 
