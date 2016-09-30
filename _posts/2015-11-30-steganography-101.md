@@ -106,4 +106,5 @@ DONE.
 * Check the comments
 * Load in any tool and check the frequency range and do a spectrum analysis.
 * Use [sonic-visualiser](http://www.sonicvisualiser.org/) and look at the spectrogram for the entire file (both in log scale and linear scale) with a good color contrast scheme. See [this challenge]({{ site.url }}/writeups/its-hungry/) from the PoliCTF 2015 we solved with this method.
+* A classic method for embedding data in an audio file is to hide it in the least significant bit of each sample. [See this article](https://labs.nettitude.com/blog/derbycon-2016-ctf-write-up/#mep_0)
 
