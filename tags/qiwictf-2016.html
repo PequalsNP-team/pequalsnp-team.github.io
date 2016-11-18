@@ -1,0 +1,26 @@
+---
+layout: default
+title: "QIWI CTF 2016 WriteUp"
+permalink: /tags/qiwictf-2016/
+cat: qiwictf-2016
+---
+
+<h1 class="category">{{ page.title }}</h1>
+<p>
+Team of 2 members (thezero and phosphore), duration of 30 hours, we have solved 11/61 challenges<br/>
+and almost solved other 4 challenges :( .<br/>
+Final score: 1600 points, Final Rank: 74/234 amongs all Teams.<br/><br/>
+We enjoyed this CTF (although some Challenge were almost impossible to solve, and the website was really slow and buggy).<br/><br/>
+As always, we pubblish only the most notable writeups.
+</p><br/>
+<h2>Writeups</h2>
+<br/>
+<ul class="posts">
+  {% for post in site.tags[page.cat] %}
+    <li>
+      <span class="post-date">{{ post.date | date: "%b %-d, %Y" }}</span>
+      <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+      {{ post.excerpt }}
+    </li>
+  {% endfor %}
+</ul>
