@@ -17,4 +17,3 @@ coverage
 tmp/*
 .jekyll-metadata
 /vendor
-/test/source/file_name.txt
