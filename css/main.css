@@ -41,8 +41,13 @@ a:visited { color: #205caa; }
 
 .center-image
 {
-    margin: 0 auto;
-    display: block;
+  margin: 0 auto;
+  display: block;
+}
+
+.half-image
+{
+  width: 50%;
 }
 
 /* Layout Styles */
