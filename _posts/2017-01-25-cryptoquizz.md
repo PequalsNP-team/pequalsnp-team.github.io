@@ -51,7 +51,7 @@ Once I had many cryptographers birthyears I've develop this script that reply ac
 
 **Here you can download the [cryptoquizz_solver.py]({{ site.url }}/assets/cryptoquizz_solver.py)**
 
-And here the final session with the **52** stored cryptographers
+And here the final session after the **52** stored cryptographers
 {% highlight console %}
 [+] Opening connection to quizz.teaser.insomnihack.ch on port 1031: Done
 ~~ What is the birth year of Horst Feistel ?
