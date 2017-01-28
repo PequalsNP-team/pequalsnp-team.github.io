@@ -24,6 +24,8 @@ $ binwalk -e flag.png
 ```
 
 And of course use `strings` (ASCII, UTF8, UTF16) or `hexdump -C` on the file, before anything advanced.
+Remember that, by default, strings decode ASCII characters, but you can set it to gather Unicode strings or to handle other types of encoding such as 32-bit big/little endian (e.g. the `-el` option will have the strings command handle 16-bit little endian encoding).
+Read "[Strings, Strings, Are Wonderful Things](https://digital-forensics.sans.org/blog/2009/05/15/strings-strings-are-wonderful-things)" from the SANS blog.
 
 * Check plaintext sections, comments (`cat`, `strings`)
 * Hex Editors are your best friend now. We suggest [hexedit](http://rigaux.org/hexedit.html) for the console or [Bless Hex Editor](http://home.gna.org/bless/) if you like it with a GUI. Check for suspicious magic bytes, correct file length, and use `dd if=inputfile.png of=anothefile.zip bs=1 skip=12345 count=6789` to extract concatenated files ("skip" will be the starting position, "count" the number of bytes from the "skip" position to extract)
@@ -63,9 +65,9 @@ gray:f: the input file is f, and the format is gray, as defined at http://www.im
 ```
 
 you may have problem viewing the output with a standard image viewer, so be sure to use gimp or convert it again `convert out.png -scale 300x200 out2.png`. An [example of challenge](https://github.com/spyoff/ctf-writeup/tree/master/sharifctf-2016/forensic-150-pretty-raw) where this technique is useful.
+
 * Use the [steganabara](http://www.freewebs.com/quangntenemy/steganabara/) tool and amplify the LSB of the image sequentially to check for anything hidden. Remember to zoom in and also look at the borders of the image. If similar colours get amplified radically different data may be hidden there.
 * [Stegsolve](https://www.wechall.net/forum/show/thread/527/Stegsolve_1.3/page-1) (a simple jar `java -jar stegosolve.jar`) is also pretty useful to extract data (based on bitplanes) and analyze images, allowing you to go through dozens of color filters to try to uncover hidden text.
-
 * Outguess
 
 ```
@@ -106,7 +108,8 @@ if __name__ == '__main__':
 
 * _(Python)_ Change the palette (or colormap) of a PNG: [link to the script]({{ site.url }}/assets/change_palette.py) - [example of usage](https://github.com/ctfs/write-ups-2014/tree/master/plaid-ctf-2014/doge-stege) // [Ruby version](http://pastebin.com/46VmzrRU)
 
-* _(PHP)_ If the image looks like it’s just a random noise we should make sure of it. We can, in fact, measure its randomness. Pixels of each color can appear in each place of the image with equal chance. If it’s false for some colors, we certainly want to look at them. [Here]({{ site.url }}/assets/detectrandomness.php) is a script for that, and the results appears below:
+* _(PHP)_ If the image looks like it’s just a random noise we should make sure of it. We can, in fact, measure its randomness. Pixels of each color can appear in each place of the image with equal chance. If it’s false for some colors, we certainly want to look at them. [Here]({{ site.url }}/assets/detectrandomness.php) is a script for that, and the results appears below: 
+
 ```
 $ php solve.php image.png
 MAX disp: 1492.41; AVG: 92.82
