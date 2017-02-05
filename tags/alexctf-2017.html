@@ -1,0 +1,25 @@
+---
+layout: default
+title: "AlexCTF 2017 WriteUp"
+permalink: /tags/alexctf-2017/
+cat: alexctf-2017
+---
+
+<h1 class="category">{{ page.title }}</h1>
+<p>
+For this CTF we have collab. with the <a href="https://jbzteam.github.io/">jbz team</a><br/>
+Team of ~10 members (2 from P=NP, thezero and phosphore), duration of 72 hours, we have solved 19/20 challenges.<br/>
+This was our best CTF since we started the team and the collab.<br/>
+Final score: 2340 points, Final Rank: 20/994.
+</p><br/>
+<h2>Writeups</h2>
+<br/>
+<ul class="posts">
+  {% for post in site.tags[page.cat] %}
+    <li>
+      <span class="post-date">{{ post.date | date: "%b %-d, %Y" }}</span>
+      <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+      {{ post.excerpt }}
+    </li>
+  {% endfor %}
+</ul>
