@@ -59,7 +59,7 @@ Read "[Strings, Strings, Are Wonderful Things](https://digital-forensics.sans.or
 * If there are large portions of the image that look the same colour check with a Bucket Fill (in gimp also remember to set the threshold to 0 when filling) for anything hidden, or play with the curves. Use [Grain extract](http://www.wikihow.com/Create-Hidden-Watermarks-in-GIMP) to check for watermarks.
 * If you see Adobe Suite/CC metadata with `strings`, be sure to open the image with the corresponding program in order to not lose layers informations. If some layer are overlapped, gimp or other image viewers usually will merge all the visible layers in once.
 * If you happen to extract a file with binwalk, but this is not the flag, you should check with an hex editor for other data before/after the file. 
-* Look for some gzipped data (`1F 8B 08`), or possible file signature/magic bytes (google it!), and extract em with `dd`. Remember that if decompressing with `tar xvf` doesn't work (e.g. incorrect header check), you may try to decompress it chunk by chunk with [this script]({{ site.url }}/assets/gzip_extract.py). 
+* Look for some gzipped data (`1F 8B 08`), or possible file signature/magic bytes (google it!), and extract 'em with `dd`. Remember that if decompressing with `tar xvf` doesn't work (e.g. incorrect header check), you may try to decompress it chunk by chunk with [this script]({{ site.url }}/assets/gzip_extract.py). 
 * If you need to plot raw binary data to an image (bitmap/png) with given width and height, you can easily use `convert` from ImageMagick.
 
 ```
