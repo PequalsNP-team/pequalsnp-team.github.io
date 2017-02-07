@@ -34,8 +34,9 @@ Read "[Strings, Strings, Are Wonderful Things](https://digital-forensics.sans.or
 
 * Check plaintext sections, comments (`cat`, `strings`)
 * Hex Editors are your best friend now. We suggest [hexedit](http://rigaux.org/hexedit.html) for the console or [Bless Hex Editor](http://home.gna.org/bless/) if you like it with a GUI. Check for suspicious magic bytes, correct file length, and use `dd if=inputfile.png of=anothefile.zip bs=1 skip=12345 count=6789` to extract concatenated files ("skip" will be the starting position, "count" the number of bytes from the "skip" position to extract)
-* Use [exiftool](http://www.sno.phy.queensu.ca/~phil/exiftool/) for [EXIF](https://it.wikipedia.org/wiki/Exchangeable_image_file_format) data
-* Use [TinEye](http://www.tineye.com/) to upload and search for the image. Select “best match” and hopefully you get the original image. [XORing](https://github.com/hellman/xortool) should do the rest of the job. Also use `compare a.png b.png result.png` from the ImageMagick suite, plenty of params available here (e.g. -compose src).
+* Use [exiftool](http://www.sno.phy.queensu.ca/~phil/exiftool/) to extract [EXIF](https://it.wikipedia.org/wiki/Exchangeable_image_file_format) data
+* Use [TinEye](http://www.tineye.com/) to upload and search for the image. Select “best match” and hopefully you get the original image. [XORing](http://stackoverflow.com/questions/8504882/searching-for-a-way-to-do-bitwise-xor-on-images) should do the rest of the job. Also use `compare a.png b.png result.png` from the ImageMagick suite, plenty of params available here (e.g. -compose src). 
+* Another steganographic approach is to hide the information in the first rows of pixel of the image. See [this chal]({{ site.url }}/writeups/SC2) for more details.
 * Use [pngcheck](http://www.libpng.org/pub/png/apps/pngcheck.html) for PNGs to check for any corruption or anomalous sections `pngcheck -v`  PNGs can contain a variety of data 'chunks' that are optional (non-critical) as far as rendering is concerned.
     * bKGD gives the default background color. It is intended for use when there is no better choice available, such as in standalone image viewers (but not web browsers; see below for more details)
     * cHRM gives the chromaticity coordinates of the display primaries and white point
@@ -58,7 +59,7 @@ Read "[Strings, Strings, Are Wonderful Things](https://digital-forensics.sans.or
 * If there are large portions of the image that look the same colour check with a Bucket Fill (in gimp also remember to set the threshold to 0 when filling) for anything hidden, or play with the curves. Use [Grain extract](http://www.wikihow.com/Create-Hidden-Watermarks-in-GIMP) to check for watermarks.
 * If you see Adobe Suite/CC metadata with `strings`, be sure to open the image with the corresponding program in order to not lose layers informations. If some layer are overlapped, gimp or other image viewers usually will merge all the visible layers in once.
 * If you happen to extract a file with binwalk, but this is not the flag, you should check with an hex editor for other data before/after the file. 
-* Look for some gzipped data (`1F 8B 08`), or possible file signature/magic bytes (google it!), and extract em with `dd`. Not always binwalk does it job: remember that If decompressing with `tar xvf` doesn't work (e.g. incorrect header check), you may try to decompress it chunk by chunk with [this script]({{ site.url }}/assets/gzip_extract.py). 
+* Look for some gzipped data (`1F 8B 08`), or possible file signature/magic bytes (google it!), and extract em with `dd`. Remember that if decompressing with `tar xvf` doesn't work (e.g. incorrect header check), you may try to decompress it chunk by chunk with [this script]({{ site.url }}/assets/gzip_extract.py). 
 * If you need to plot raw binary data to an image (bitmap/png) with given width and height, you can easily use `convert` from ImageMagick.
 
 ```
