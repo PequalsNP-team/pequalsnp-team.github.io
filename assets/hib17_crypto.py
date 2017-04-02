@@ -34,7 +34,6 @@ def decrypt(ciphertext):
     print(resp.text)
     
 c,p = crypt(sys.argv[1])
-ci = bytearray(c)
-block_print(ci,32)
-block_print(p,32)
-# decrypt(ci)
+block_print(c,32)
+block_print(p,16)
+# decrypt(c)
