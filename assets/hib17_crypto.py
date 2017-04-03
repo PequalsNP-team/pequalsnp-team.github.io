@@ -17,7 +17,6 @@ def decode(c):
     return binascii.hexlify(base64.b64decode(parse.unquote(c)))
     
 def encode(c):
-    print(base64.b64encode(binascii.unhexlify(c)))
     return parse.quote(base64.b64encode(binascii.unhexlify(c)))
     
 def crypt(payload):
