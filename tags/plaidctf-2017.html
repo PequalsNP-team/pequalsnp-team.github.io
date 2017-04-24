@@ -1,0 +1,24 @@
+---
+layout: default
+title: "PlaidCTF 2017 WriteUp"
+permalink: /tags/plaidctf-2017/
+cat: plaidctf-2017
+---
+
+<h1 class="category">{{ page.title }}</h1>
+<p>
+Team of ~10 members (2 from P=NP, thezero and phosphore, the rest from JBZ), duration of 48 hours, and we solved 7/23 challenges.<br/>
+We ended up with a pretty good score for such an important and difficult CTF.<br/>
+Final score: 837 points, Final Rank: 58/1143.
+</p><br/>
+<h2>Writeups</h2>
+<br/>
+<ul class="posts">
+  {% for post in site.tags[page.cat] %}
+    <li>
+      <span class="post-date">{{ post.date | date: "%b %-d, %Y" }}</span>
+      <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+      {{ post.excerpt }}
+    </li>
+  {% endfor %}
+</ul>
