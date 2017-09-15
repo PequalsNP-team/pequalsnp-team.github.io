@@ -1,0 +1,24 @@
+---
+layout: default
+title: "SECT CTF 2017 WriteUp"
+permalink: /tags/sectctf-2017/
+cat: sectctf-2017
+---
+
+<h1 class="category">{{ page.title }}</h1>
+<p>
+Team of ~10 members (2 from P=NP, thezero and phosphore, the rest from JBZ), duration of 48 hours, and we solved 11/22 challenges.<br/>
+We ended up with a pretty good score and We really liked those challenges.<br/>
+Final score: 1825 points, Final Rank: 16/500.
+</p><br/>
+<h2>Writeups</h2>
+<br/>
+<ul class="posts">
+  {% for post in site.tags[page.cat] %}
+    <li>
+      <span class="post-date">{{ post.date | date: "%b %-d, %Y" }}</span>
+      <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+      {{ post.excerpt }}
+    </li>
+  {% endfor %}
+</ul>
