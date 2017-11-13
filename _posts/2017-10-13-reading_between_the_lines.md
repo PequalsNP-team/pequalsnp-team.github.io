@@ -3,7 +3,7 @@ layout: post
 title: "Square CTF 2017 - Reading between the lines"
 category: writeups
 author: thezero
-tags: squarectf-2017 crypto
+tags: squarectf-2017 forensics
 ---
 
 Forensics - 100 Points
