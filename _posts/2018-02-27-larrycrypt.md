@@ -8,7 +8,7 @@ tags: tamu-2018 crypto
 
 Reverse - 200 Points
 
-A binary executable called `larrycrypt` were provided.
+A binary executable called `larrycrypt` was provided.
 
 `./larrycrypt -R 4 -K "V3c70R" flag`
 
@@ -19,14 +19,14 @@ We tried some input for the `larrycrypt` binary and we noticed that it was alway
 It was likely some bug, but then the [SimpleDES challenge]({{site.url}}/writeups/simpleDES) we just solved came to our minds.
 
 The binary was using the same key as the other challenge's example.  
-So we thought it was using the same algorithm maybe but it wasn't the case.
+So we thought it was using the same algorithm, but it wasn't the case.
 
 Larrycrypt was using 6bit blocks for the ciphertext.  
-The first block of ciphertext was the same as SimpleDES first 6bit of cyphertext when using the same key and the same number of rounds.  
-With some more reverse engineering we figured out that larrycrypt was taking the first 12 bits of plaintext, splitting it into `L0` and `R0`, performing the round function and printing only the resulting `L1`.  
+The first block of ciphertext was the same as SimpleDES's first 6bit of cyphertext when using the same key and the same number of rounds.
+With some more reverse engineering we figured out that larrycrypt was taking the first 12 bits of plaintext, splitting them into `L0` and `R0`, performing the round function and printing only the resulting `L1`.  
 So they were using the same round function.
 
-But then the sequence changes, We take the `R` output from the round function and use it as `L` for the next round along with the next block of ciphertext.
+But then the sequence changes, we take the `R` output from the round function and use it as `L` for the next round along with the next block of ciphertext.
 
 This image shows an example on 3 blocks of data, the output cypertext is made of `cypher0`, `cypher1`. `L2` won't be printed.
 ![larrycrypt scheme]({{site.url}}/assets/TAMU2018/larryscheme.png){: .center-image }
