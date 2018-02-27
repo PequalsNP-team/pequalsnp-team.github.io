@@ -57,14 +57,14 @@ Binary of ciphertext: 01100101 00100010 10001100 01011000 00010001 10000101
 
 While we started reading the implementation for this cipher we noticed that it was based on a [Feistel network](https://en.wikipedia.org/wiki/Feistel_cipher)
 
-A Feistel network is a scheme that let you construct a block cipher efficently since it requires only a round function (that can even be invertible) and itself it involves only XOR operation.
+A Feistel network is a scheme that lets you construct a block cipher efficently since it requires only a round function (that doesn't need to be invertible) and it only involves XOR operations.
 
-The decryption is pretty straightforward.  
+The decryption is pretty straightforward.
 Referring to the simpleDES implementation above:  
-On step 3, for every block before starting the rounds iteration, swap L with R.  
+On step 3, for every block before starting the rounds iteration, swap L with R.
 Then at the end of the R rounds, swap L and R again.
 
-You will also need to reverse the key schedule for round iteration.  
+You also need to reverse the key schedule for round iteration.  
 Let's assume you have 1 block and 3 rounds.
 
 For the encryption you use the keys `K0`, `K1` and `K2`.
@@ -73,7 +73,7 @@ For the decryption you will need to use `K2`, `K1` and `K0`.
 Why?  
 Immagine you start from 1 block of plaintext. You split it into 2 blocks `L0` and `R0`.  
 Now you use `K0` and `R0` on the round function `F`.  
-This function will spit out "garbage" `Z` that you XOR it with `L0`.
+This function will spit out "garbage" `Z` that you XOR with `L0`.
 You can now use the result as `R1` and use `R0` as `L1`.
 
 For the decryption you only need to XOR the "garbage" `Z` again with `R1`
