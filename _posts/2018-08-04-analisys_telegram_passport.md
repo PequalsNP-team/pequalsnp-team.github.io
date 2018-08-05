@@ -148,6 +148,8 @@ The code is pretty bad and nowhere near a stable version but you can download it
 Run the server with `python2 tpassport.py` and then the client with `python3 passport_oracle.py`.
 You may need to resolve some dependency to run the scripts.
 
+![Tpassport Padding length]({{site.url}}/assets/tpassport.png){: .center-image .half-image }
+
 ## Conclusion
 
 It doesn't matter what type of padding you use along with CBC-mode, there always is an approach that can be used in a padding oracle scenario to decrypt the cyphertext.
