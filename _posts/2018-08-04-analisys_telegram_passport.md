@@ -8,6 +8,10 @@ tags: crypto
 
 Since the Telegram Passport came out, I tried to analyze its protocol to understand whether the encryption of users' data was strong and properly implemented.
 
+***UPDATE: It seems that the Telegram Passport specification is written "superficially" and I assumed the data was right-padded.  
+It's left-padded instead, so the content of this post is based on a wrong interpretation of them.  
+This attack doesn't apply to Telegram Passport.***
+
 The specification describes a centralized encrypted storage where "users can upload their documents once, then instantly share their data with services that require real-world ID (finance, ICOs, etc.)". If you want to read the full specification you can check [Telegram's documentation](https://core.telegram.org/passport).
 
 This blog post will focus on the custom padding, designed by Telegram, used together with AES-CBC, and how it can be abused. This flow is used when the Telegram client shares the user document with the third-party service.
@@ -143,12 +147,12 @@ As we noticed above, this approach is also prone to false-positives, so once we 
 
 While I was researching this I wrote a simple server implementing our defined scenario, and a client performing the padding oracle attack demonstrating our discovery.
 
-The code is pretty bad and nowhere near a stable version but you can download it [here](https://github.com/PequalsNP-team/pequalsnp-team.github.io/tree/master/assets/TelegramPassport).
+The code is just a PoC, it's pretty bad and nowhere near a stable version but you can download it [here](https://github.com/PequalsNP-team/pequalsnp-team.github.io/tree/master/assets/TelegramPassport).
 
 Run the server with `python2 tpassport.py` and then the client with `python3 passport_oracle.py`.
 You may need to resolve some dependency to run the scripts.
 
-![Tpassport Padding length]({{site.url}}/assets/tpassport.png){: .center-image .half-image }
+![Tpassport Padding length]({{site.url}}/assets/tpassport.png){: .center-image }
 
 ## Conclusion
 
