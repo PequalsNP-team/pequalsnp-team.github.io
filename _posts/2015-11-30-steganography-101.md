@@ -87,7 +87,7 @@ $ ./outguess [options] [<input file> [<output file>]]
 
 ```
 
-* [OpenStego](http://www.openstego.info/) is another GUI tool used for Random LSB.
+* [OpenStego](http://www.openstego.com/) is another GUI tool used for Random LSB.
 * [StegHide](http://steghide.sourceforge.net/), to extract embedded data from stg.jpg: `steghide extract -sf stg.jpg`.
 * [StegSpy](http://www.spy-hunter.com/stegspydownload.htm) will detect steganography and the program used to hide the message, checking for classical steganographical schemes.
 
